@@ -44,3 +44,14 @@ module.exports.logOut = (req, res) => {
         res.redirect("/listings");
     })
 }
+
+
+module.exports.prof = (req, res) =>{
+     if (!req.isAuthenticated()) {
+        return res.redirect('/login');
+    }
+    
+    const currentUser = req.user;  
+    
+    res.render('users/profile', { username: currentUser.username, email: currentUser.email });
+}

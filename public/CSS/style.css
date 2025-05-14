@@ -134,20 +134,10 @@ body{
     border: none !important;
 }
 
-/* SHOW PAGE */
-.show-img{
-    height: 40vh;
-}
-.btns{
-    display: flex;
-    
-}
-.show-card{
-    padding-left: 0;
-    padding-right: 0;
-    border: none !important;  
-}
 
+
+
+/* SHOW PAGE */
 
 .show-container {
   width: 80%;
@@ -276,3 +266,119 @@ body{
 }
 
 
+
+/* USER ICON */
+.user-icon {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: #000;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s ease-in-out;
+}
+
+.dropdown-content a:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+/* PROFILE.EJS */
+.profile-heading {
+    text-align: center;
+    color: #fe424d;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.profile-details {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.profile-details h4 {
+    color: #333;
+    font-weight: bold;
+}
+
+.profile-details p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-favorites,
+.btn-logout {
+    background-color:white;
+    color: #fe424d;
+    border: 3px solid #fe424d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-favorites:hover ,
+.btn-logout:hover {
+    background-color: #fe424d;
+    color: white;
+    box-shadow: 0 3px 6px black;
+}
+
+
+@media (max-width: 768px) {
+    .profile-heading {
+        font-size: 1.5rem;
+    }
+
+    .profile-details {
+        padding: 15px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,14 @@
+<% layout("/layouts/boilerplate") %>
+<div class="container mt-5">
+    <h2 class="profile-heading">Welcome to Your Profile,<b><%= username %>!</b> </h2>
+    
+    <div class="profile-details">
+        <h4>Email: <%= email %></h4>
+        <p>Username: <%= username %></p>
+    </div>
+
+    <div class="actions">
+        <a href="/favorites" class=" btn-favorites">My Favorites</a>
+        <a href="/logout" class=" btn-logout">Log Out</a>
+    </div>
+</div>

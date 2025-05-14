@@ -14,7 +14,7 @@
         <form class="d-flex" role="search" action="/listings/search" method="get">
           <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" name="query">
           <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-        </form>    
+        </form>
       </div>
 
       <div class="navbar-nav ms-auto">
@@ -22,12 +22,19 @@
         <% if(!currUser) { %>
           <a class="nav-link" href="/signup"><b>SignUp </b></a>
           <a class="nav-link" href="/login"><b> LogIn</b></a>
-        <% } %>
+          <% } %>
 
-        <% if(currUser) { %>
-          <a class="nav-link" href="/favorites"><b>My Favorites</b></a> <!-- Add this link -->
-          <a class="nav-link" href="/logout"><b>LogOut</b></a>
-        <% } %>
+            <% if(currUser) { %>
+              <div class="dropdown">
+                <button class="dropbtn"><i class="fa-solid fa-user user-icon"></i> </button>
+                <div class="dropdown-content">
+                  <a href="/profile">My Profile</a>
+                  <a href="/favorites">My Favorites</a>
+                  <a href="/bookings">My Bookings</a>
+                  <a href="/logout">Logout</a>
+                </div>
+              </div>
+            <% } %>
 
       </div>
     </div>
