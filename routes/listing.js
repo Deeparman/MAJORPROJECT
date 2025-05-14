@@ -29,6 +29,9 @@ router.route("/:id")
 //Update: EDIT ROUTE
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
 
+
+
+
 module.exports = router;
 
 

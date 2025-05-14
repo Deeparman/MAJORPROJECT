@@ -16,6 +16,7 @@ const ExpressError = require("./utils/ExpressError.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js")
+const favRouter = require("./routes/fav.js");
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
@@ -33,18 +34,18 @@ app.set("views", path.join(__dirname, "/views"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-// const url = "mongodb://127.0.0.1:27017/wanderlust"
+const url = "mongodb://127.0.0.1:27017/wanderlust"
 const dbUrl = process.env.ATLASDB_URL;
 
 main().then(() => { console.log("SUCCESSFULLY CONNECTED"); })
     .catch((err) => { console.log(err); })
 
 async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(url);
 }
 
 const store = MongoStore.create({
-    mongoUrl: dbUrl,
+    mongoUrl: url,
     crypto: {
         secret: process.env.SECRET
     },
@@ -92,6 +93,7 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter)
+app.use(favRouter);
 
 
 //when no route will match, this will execute

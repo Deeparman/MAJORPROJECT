@@ -1,17 +1,15 @@
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
     <div class="navbar-nav ">
-    <a class="nav-link" href="/listings" style="color: #fe424d;"><b>WANDERLUST</b></a>
-  </div>
+      <a class="nav-link" href="/listings" style="color: #fe424d;"><b>WANDERLUST</b></a>
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
+    <div class="collapse navbar-collapse mobile-nav-bg" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto ">
         <form class="d-flex" role="search" action="/listings/search" method="get">
           <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" name="query">
@@ -27,6 +25,7 @@
         <% } %>
 
         <% if(currUser) { %>
+          <a class="nav-link" href="/favorites"><b>My Favorites</b></a> <!-- Add this link -->
           <a class="nav-link" href="/logout"><b>LogOut</b></a>
         <% } %>
 
