@@ -17,6 +17,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js")
 const favRouter = require("./routes/fav.js");
+const bookRouter = require("./routes/booking.js");
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
@@ -94,6 +95,7 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter)
 app.use(favRouter);
+app.use(bookRouter);
 
 
 //when no route will match, this will execute

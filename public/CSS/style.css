@@ -197,16 +197,22 @@ body{
   gap: 1rem;
 }
 
+
 .btn-edit,
 .btn-delete {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  background-color: #fe424d;
-  color: white;
+  background-color: #fe424d !important;
+  color: white !important;
   text-align: center;
 }
+
+.btn:hover{
+    box-shadow: 0 3px 6px black;
+}
+
 
 .review-section {
   margin-top: 2rem;
@@ -381,4 +387,10 @@ body{
         flex-direction: column;
         gap: 10px;
     }
+}
+
+
+.btn-view-book{
+  border: 3px solid #fe424d !important;
+  margin-bottom: 2px;
 }
