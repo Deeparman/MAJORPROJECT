@@ -35,18 +35,18 @@ app.set("views", path.join(__dirname, "/views"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-const url = "mongodb://127.0.0.1:27017/wanderlust"
+// const url = "mongodb://127.0.0.1:27017/wanderlust"
 const dbUrl = process.env.ATLASDB_URL;
 
 main().then(() => { console.log("SUCCESSFULLY CONNECTED"); })
     .catch((err) => { console.log(err); })
 
 async function main() {
-    await mongoose.connect(url);
+    await mongoose.connect(dbUrl);
 }
 
 const store = MongoStore.create({
-    mongoUrl: url,
+    mongoUrl: dbUrl,
     crypto: {
         secret: process.env.SECRET
     },
