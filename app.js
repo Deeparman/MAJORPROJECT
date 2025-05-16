@@ -90,12 +90,17 @@ app.use((req, res, next) => {
 })
 
 
+app.get('/', (req, res) => {
+  res.redirect('/listings');
+});
+
 //LISTING AND REVIEW ROUTES
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter)
 app.use(favRouter);
 app.use(bookRouter);
+
 
 
 //when no route will match, this will execute
