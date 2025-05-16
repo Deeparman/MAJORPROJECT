@@ -15,13 +15,15 @@ body{
 }
 .navbar.bg-body-tertiary {
     background-color: white !important;
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Mobile menu background */
 @media (max-width: 992px) {
     .mobile-nav-bg {
         width: 50% !important;
-        background-color: #fe424d;
+        background-color: whitesmoke;
         padding: 1rem;
         box-shadow: 0px 4px 6px rgba(0,0,0,0.1); 
         z-index: 1000;
@@ -158,16 +160,15 @@ body{
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
-
-.show-img {
-  width: 90%;
-  /* height: auto; */
+.show-img{
+ width: 90%;
+  max-width: 400px;   /* optional max width */
+  aspect-ratio: 3 / 2;  /* enforce 3:2 ratio */
   object-fit: cover;
   display: block;
   margin: auto;
   border-radius: 8px;
 }
-
 
 .show-card-body {
   padding-top: 1rem;
@@ -319,7 +320,36 @@ body{
   display: block;
 }
 
+@media (max-width: 992px) {
+  .dropbtn {
+    display: none !important;
+  }
 
+  .dropdown-content {
+    display: flex !important;
+    position: static !important; 
+    box-shadow: none !important;
+    background-color: transparent !important;
+    flex-direction: column;
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+
+  .dropdown-content a {
+    padding: 0.5rem 1rem;
+    color: black;
+    font-weight: 600;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #d83a3f;
+    color: white;
+  }
+
+  .dropdown {
+    margin: 0;
+  }
+}
 
 /* PROFILE.EJS */
 .profile-heading {
@@ -388,7 +418,6 @@ body{
         gap: 10px;
     }
 }
-
 
 .btn-view-book{
   border: 3px solid #fe424d !important;
