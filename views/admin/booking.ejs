@@ -1,0 +1,100 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>All Bookings</h2>
+
+    <span class="badge bg-danger fs-6">
+        <%= bookings.length %> Bookings
+    </span>
+</div>
+
+<% if(bookings.length === 0){ %>
+
+    <div class="alert alert-info">
+        No bookings found.
+    </div>
+
+<% } else { %>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-danger">
+
+                        <tr>
+                            <th>User</th>
+                            <th>Hotel</th>
+                            <th>Location</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Rooms</th>
+                            <th>Guests</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% bookings.forEach(booking => { %>
+
+                        <tr>
+
+                            <td>
+                                <%= booking.user?.username || "Unknown" %>
+                            </td>
+
+                            <td>
+                                <%= booking.listing?.title || "Deleted Listing" %>
+                            </td>
+
+                            <td>
+                                <%= booking.listing?.location || "-" %>
+                            </td>
+
+                            <td>
+                                <%= new Date(booking.checkIn).toLocaleDateString() %>
+                            </td>
+
+                            <td>
+                                <%= new Date(booking.checkOut).toLocaleDateString() %>
+                            </td>
+
+                            <td>
+                                <%= booking.roomsBooked || 1 %>
+                            </td>
+
+                            <td>
+                                <%= booking.guests %>
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-success">
+                                    <%= booking.status || "confirmed" %>
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<% } %>
+</div>

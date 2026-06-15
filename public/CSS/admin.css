@@ -1,0 +1,88 @@
+
+.admin-container{
+    display:flex;
+    min-height:100vh;
+}
+
+.admin-sidebar{
+    width:260px;
+    background:white;
+    border-right:1px solid #e5e5e5;
+    padding:25px ;
+}
+
+.admin-logo{
+    color:#fe424d;
+    font-weight:700;
+    font-size:1.8rem;
+    margin-bottom:30px;
+}
+
+.admin-sidebar a{
+    display:block;
+    text-decoration:none;
+    color:#333;
+    padding:12px;
+    margin-bottom:8px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.admin-sidebar a:hover{
+    background:#fff0f1;
+    color:#fe424d;
+}
+
+.admin-sidebar .active{
+    background:#fe424d;
+    color:white;
+}
+
+.admin-main{
+    flex:1;
+    /* background:#f8f9fa; */
+    padding:30px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.stat-card h6{
+    color:#777;
+}
+
+.stat-card h2{
+    color:#fe424d;
+    font-weight:bold;
+}
+
+.dashboard-card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.table thead{
+    background:#fe424d;
+    color:white;
+}
+
+.chart-container{
+    height:400px;
+}
+
+.admin-sidebar{
+    width:220px;
+}

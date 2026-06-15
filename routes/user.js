@@ -4,6 +4,7 @@ const user = require("../models/user.js");
 const wrapAsync = require("../utils/wrapasync.js");
 const passport = require("passport");
 const { saveRedirect } = require("../middleware.js");
+const { isLoggedIn, isAdmin, isHotelOwner } = require("../middleware.js");
 
 const userController = require("../controllers/user.js");
 

@@ -27,12 +27,33 @@ module.exports.isOwner = async (req, res, next) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
 
-    if (!listing.owner._id.equals(res.locals.currUser._id)) {
-        req.flash("error", "You are not owner of tis listing!");
+    if (res.locals.currUser.role === "admin") {
+        return next();
+    }
+
+    if (!listing.owner.equals(res.locals.currUser._id)) {
+        req.flash("error", "You are not owner of this listing!");
         return res.redirect(`/listings/${id}`);
     }
+
     next();
-}
+};
+
+module.exports.isHotelOwner = (req, res, next) => {
+    if (req.user.role !== "hotelOwner" && req.user.role !== "admin") {
+        req.flash("error", "Only hotel owners allowed");
+        return res.redirect("/listings");
+    }
+    next();
+};
+
+module.exports.isAdmin = (req, res, next) => {
+    if (req.user.role !== "admin") {
+        req.flash("error", "Admin only area");
+        return res.redirect("/listings");
+    }
+    next();
+};
 
 module.exports.validateListing = (req, res, next) => {
     let { error } = listingSchema.validate(req.body);  // check if req.body validate all the constraints/cond in listingSchema

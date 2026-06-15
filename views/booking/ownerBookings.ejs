@@ -1,0 +1,43 @@
+<% layout("layouts/boilerplate") %>
+
+<h2 class="mb-4">Owner Bookings</h2>
+
+<% if(bookings.length === 0) { %>
+  <p>No bookings found.</p>
+<% } %>
+
+<div class="row">
+  <% bookings.forEach(b => { %>
+
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm">
+
+        <img src="<%= b.listing.image.url %>" class="card-img-top" style="height:180px; object-fit:cover;">
+
+        <div class="card-body">
+
+          <h5><%= b.listing.title %></h5>
+
+          <p><b>User:</b> <%= b.user.username %></p>
+
+          <p><b>Guests:</b> <%= b.guests %></p>
+
+          <p>
+            <b>Check-in:</b>
+            <%= new Date(b.checkIn).toDateString() %>
+          </p>
+
+          <p>
+            <b>Check-out:</b>
+            <%= new Date(b.checkOut).toDateString() %>
+          </p>
+
+          <span class="badge bg-success"><%= b.status %></span>
+
+        </div>
+
+      </div>
+    </div>
+
+  <% }) %>
+</div>

@@ -7,6 +7,12 @@ const listingSchema = new Schema({
         type: String,
         required: true,
     },
+    totalRooms: {
+        type: Number,
+        required: true,
+        default: 1,
+        min: 1
+    },
     description: {
         type: String,
     },
@@ -37,6 +43,11 @@ const listingSchema = new Schema({
         enum: ["Mountain", "Historical", "Farm", "Castle", "Beaches","Camping","Amazing pools","Iconic cities","Arctic","Domes","Boats"],
         required: true
     },
+        status: {
+        type: String,
+        enum: ["pending", "approved"],
+        default: "pending"   
+    }
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

@@ -18,6 +18,8 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js")
 const favRouter = require("./routes/fav.js");
 const bookRouter = require("./routes/booking.js");
+const adminRoutes = require("./routes/admin.js");
+const ownerRoutes = require("./routes/owner.js");
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
@@ -35,18 +37,18 @@ app.set("views", path.join(__dirname, "/views"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-// const url = "mongodb://127.0.0.1:27017/wanderlust"
-const dbUrl = process.env.ATLASDB_URL;
+const url = "mongodb://127.0.0.1:27017/wanderlust"
+// const dbUrl = process.env.ATLASDB_URL;
 
 main().then(() => { console.log("SUCCESSFULLY CONNECTED"); })
     .catch((err) => { console.log(err); })
 
 async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(url);
 }
 
 const store = MongoStore.create({
-    mongoUrl: dbUrl,
+    mongoUrl: url,
     crypto: {
         secret: process.env.SECRET
     },
@@ -100,6 +102,8 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter)
 app.use(favRouter);
 app.use(bookRouter);
+app.use("/admin", adminRoutes);
+app.use("/owner", ownerRoutes);
 
 
 
@@ -120,3 +124,5 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
     console.log("server is listening to port 3000");
 })
+
+// fix navbar nd footer

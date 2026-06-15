@@ -1,0 +1,109 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">User Management</h2>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Listings</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <% users.forEach(user => { %>
+
+                    <tr>
+
+                        <td>
+                            <%= user.username %>
+                        </td>
+
+                        <td>
+                            <%= user.email %>
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-secondary">
+                                <%= user.role %>
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <%= listings.filter(l =>
+                                l.owner &&
+                                l.owner.toString() === user._id.toString()
+                            ).length %>
+
+                        </td>
+
+                        <td>
+
+                            <% const hasListings = listings.some(l =>
+                                l.owner &&
+                                l.owner.toString() === user._id.toString()
+                            ); %>
+
+                            <% if(user.role === "user" && hasListings){ %>
+
+                            <form
+                                method="POST"
+                                action="/admin/make-owner/<%= user._id %>?_method=PATCH"
+                                style="display:inline"
+                            >
+
+                                <button class="btn btn-success btn-sm">
+                                    Make Owner
+                                </button>
+
+                            </form>
+
+                            <% } %>
+
+                            <% if(user.role !== "admin"){ %>
+
+                            <form
+                                method="POST"
+                                action="/admin/make-user/<%= user._id %>?_method=PATCH"
+                                style="display:inline"
+                            >
+
+                                <button class="btn btn-outline-danger btn-sm">
+                                    Reset
+                                </button>
+
+                            </form>
+
+                            <% } %>
+
+                        </td>
+
+                    </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

@@ -23,6 +23,7 @@ module.exports.listingSchema = Joi.object({
           "Boats"
         )
         .required(),
+        totalRooms: Joi.number().integer().min(1).required()
     }).required()
 });
 

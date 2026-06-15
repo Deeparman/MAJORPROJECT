@@ -1,0 +1,22 @@
+<% layout("layouts/boilerplate") %>
+
+<h2>My Listings</h2>
+
+<div class="row">
+  <% listings.forEach(listing => { %>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="<%= listing.image.url %>" class="card-img-top">
+        <div class="card-body">
+          <h5><%= listing.title %></h5>
+          <p><%= listing.location %></p>
+          <p>₹<%= listing.price %></p>
+
+          <a href="/listings/<%= listing._id %>" class="btn btn-primary btn-sm">
+            View
+          </a>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>

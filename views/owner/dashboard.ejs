@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate") %>
+
+<h1> Hotel Owner Dashboard</h1>
+
+<p>Welcome, <%= currUser.username %> 👋</p>
+
+<a href="/listings/new">Add New Listing</a>
+
+<hr>
+
+<h3>Your Listings</h3>
+
+<% if (listings.length === 0) { %>
+    <p>No listings yet.</p>
+<% } else { %>
+    <div>
+        <% listings.forEach(item => { %>
+            <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+                <h4><%= item.listing.title %></h4>
+                <p><%= item.listing.location %></p>
+                <p>₹ <%= item.listing.price %></p>
+
+                <p><b>Total Rooms:</b> <%= item.totalRooms %></p>
+                <p><b>Rooms Booked (all confirmed bookings):</b> <%= item.roomsBooked %></p>
+                <p><b>Available Rooms:</b> <%= item.availableRooms %></p>
+                <p><b>Occupancy:</b> <%= item.occupancyPct.toFixed(1) %>%</p>
+
+                <a href="/listings/<%= item.listing._id %>">View</a>
+                <a href="/listings/<%= item.listing._id %>/edit">Edit</a>
+            </div>
+        <% }) %>
+    </div>
+<% } %>

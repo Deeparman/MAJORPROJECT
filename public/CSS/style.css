@@ -6,6 +6,8 @@ body{
 }
 .container{
     flex: 1;
+    margin-left:0;
+    margin-right:0;
 }
 
 /* NAVBAR */
@@ -77,7 +79,7 @@ body{
 {
     width: 100%;
    display: flex;
-   align-items: centre;
+   align-items: center;
    justify-content: center;
 }
 
@@ -93,8 +95,8 @@ body{
     height: 8rem;
     background-color: #ebebee;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 /* !important   to override bootstrap with custom css */
@@ -135,8 +137,6 @@ body{
     background-color: #fe424d !important;
     border: none !important;
 }
-
-
 
 
 /* SHOW PAGE */

@@ -1,20 +1,23 @@
 const Listing = require("../models/listing.js");
 
 module.exports.index = async (req, res) => {
-    const {category} = req.query;
-    let allList; 
-    if(category){
-        allList = await Listing.find({ category : { $regex: new RegExp(category, "i") }});
-        if (allList.length === 0) {
-            console.log(`No listings found for category: ${category}. Redirecting to index page.`);
-            req.flash("error", `No listing found for ${category}!!`);
-            return res.redirect('/listings');
-        }
-    } else {
-        allList = await Listing.find({});
+    const { category } = req.query;
+
+    let filter = { status: "approved" };
+
+    if (category) {
+        filter.category = { $regex: new RegExp(category, "i") };
     }
-    res.render("listings/index.ejs", { allList,category });
-}
+
+    let allList = await Listing.find(filter);
+
+    if (category && allList.length === 0) {
+        req.flash("error", `No listing found for ${category}`);
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/index.ejs", { allList, category });
+};
 
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
@@ -36,19 +39,22 @@ module.exports.showListing =async (req, res) => {
     res.render("listings/show.ejs", { listing });
 }
 
-module.exports.createListing =async (req, res, next) => {
+module.exports.createListing = async (req, res) => {
     let url = req.file.path;
     let filename = req.file.filename;
 
-    // let {title ,description, price, image ,country , location} = req.body;
-
     const newlist = new Listing(req.body.listing);
+
     newlist.owner = req.user._id;
-    newlist.image = {url,filename};
+    newlist.image = { url, filename };
+
+    newlist.status = "pending";
+
     await newlist.save();
-    req.flash("success", "New listing added successfully!");
-    res.redirect("/listings");
-}
+
+    req.flash("success", "Listing submitted for admin approval!");
+    res.redirect("/owner");
+};
 
 module.exports.renderEditForm = async (req, res) => {
     let { id } = req.params;
@@ -100,7 +106,16 @@ module.exports.searchListing = async(req,res) =>{
 
 module.exports.destroyListing = async (req, res) => {
     let { id } = req.params;
-    let del = await Listing.findByIdAndDelete(id);
+
+    let listing = await Listing.findById(id);
+
+    if (!listing.owner.equals(req.user._id) && req.user.role !== "admin") {
+        req.flash("error", "Not allowed");
+        return res.redirect("/listings");
+    }
+
+    await Listing.findByIdAndDelete(id);
+
     req.flash("success", "Listing deleted!");
     res.redirect("/listings");
-}
+};

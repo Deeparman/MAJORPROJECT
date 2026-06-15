@@ -63,12 +63,18 @@
                 <input type="date" name="checkOut" id="checkOut" class="form-control" required>
               </div>
               <div class="mb-3">
+                <label for="roomsBooked" class="form-label">Number of Rooms</label>
+                <input type="number" class="form-control" id="roomsBooked" name="roomsBooked" min="1" required value="1">
+              </div>
+
+              <div class="mb-3">
                 <label for="guests" class="form-label">Number of Guests</label>
                 <input type="number" class="form-control" id="guests" name="guests" min="1" max="10" required>
               </div>
 
               <button class="btn btn-primary" type="submit" style="background-color: #fe424d;">Book Now</button>
             </form>
+
           </div>
           <% } else { %>
             <p><a href="/login">Log in</a> to book this stay.</p>

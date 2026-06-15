@@ -1,0 +1,120 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Pending Listing Approvals</h2>
+
+    <span class="badge bg-danger fs-6">
+        <%= pendingListings.length %> Pending
+    </span>
+</div>
+
+<% if (pendingListings.length === 0) { %>
+
+    <div class="alert alert-success">
+        No pending listings found.
+    </div>
+
+<% } else { %>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-danger">
+
+                        <tr>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Owner</th>
+                            <th>Location</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% pendingListings.forEach(listing => { %>
+
+                            <tr>
+
+                                <td>
+                                    <img
+                                        src="<%= listing.image.url %>"
+                                        width="80"
+                                        height="60"
+                                        style="object-fit:cover;border-radius:8px;"
+                                    >
+                                </td>
+
+                                <td>
+                                    <%= listing.title %>
+                                </td>
+
+                                <td>
+                                    <%= listing.owner?.username || "Unknown" %>
+                                </td>
+
+                                <td>
+                                    <%= listing.location %>
+                                </td>
+
+                                <td>
+                                    <%= listing.category %>
+                                </td>
+
+                                <td>
+                                    <span class="badge bg-warning text-dark">
+                                        <%= listing.status %>
+                                    </span>
+                                </td>
+
+                                <td>
+
+                                    <form
+                                        method="POST"
+                                        action="/admin/listings/<%= listing._id %>/approve?_method=PATCH"
+                                        style="display:inline;"
+                                    >
+                                        <button class="btn btn-success btn-sm">
+                                            Approve
+                                        </button>
+                                    </form>
+
+                                    <form
+                                        method="POST"
+                                        action="/admin/listings/<%= listing._id %>/reject?_method=PATCH"
+                                        style="display:inline;"
+                                    >
+                                        <button class="btn btn-danger btn-sm">
+                                            Reject
+                                        </button>
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<% } %>
+
+</div>

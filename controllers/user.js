@@ -31,9 +31,21 @@ module.exports.renderLoginForm = (req, res) => {
 
 module.exports.logIn = async (req, res) => {
     req.flash("success", "Welcome back to Wanderlust!!");
-    let redirect = res.locals.redirectUrl || "/listings";
+
+    let user = req.user; // Passport gives logged-in user
+
+    let redirect = "/listings"; // default
+
+    if (user.role === "admin") {
+        redirect = "/admin";
+    } else if (user.role === "hotelOwner") {
+        redirect = "/owner";
+    } else if (res.locals.redirectUrl) {
+        redirect = res.locals.redirectUrl;
+    }
+
     res.redirect(redirect);
-}
+};
 
 module.exports.logOut = (req, res) => {
     req.logOut((err, next) => {

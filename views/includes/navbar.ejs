@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top" >
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
     <div class="navbar-nav ">
@@ -8,38 +8,80 @@
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse mobile-nav-bg" id="navbarNavAltMarkup">
-      <div class="navbar-nav ms-auto ">
+
+      <!-- SEARCH BAR -->
+      <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search" action="/listings/search" method="get">
           <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" name="query">
-          <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          <button class="btn btn-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
         </form>
       </div>
 
+      <!-- NAV LINKS -->
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new"><B>Wanderlust your home</B></a>
+
+        <a class="nav-link" href="/listings/new">
+          <b>Wanderlust your home</b>
+        </a>
+
+        <!-- NOT LOGGED IN -->
         <% if(!currUser) { %>
-          <a class="nav-link" href="/signup"><b>SignUp </b></a>
-          <a class="nav-link" href="/login"><b> LogIn</b></a>
+          <a class="nav-link" href="/signup"><b>SignUp</b></a>
+          <a class="nav-link" href="/login"><b>LogIn</b></a>
           <% } %>
 
-            <% if(currUser) { %>
-                  <div class="dropdown user-dropdown">
-              <div class="dropdown">
-                <button class="dropbtn"><i class="fa-solid fa-user user-icon"></i> </button>
-                <div class="dropdown-content">
-                  <a href="/profile">My Profile</a>
-                  <a href="/favorites">My Favorites</a>
-                  <a href="/bookings">My Bookings</a>
-                  <a href="/logout" style="color: #fe424d;">Logout</a>
-                </div>
-              </div>
-            <% } %>
-                <div class="dropdown user-dropdown">
+            <!-- LOGGED IN -->
 
+            <% if(currUser) { %>
+
+              <% if(currUser.role==="user" ) { %>
+                <div class="dropdown user-dropdown">
+                  <button class="dropbtn">
+                    <i class="fa-solid fa-user"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <a href="/profile">My Profile</a>
+                    <a href="/favorites">My Favorites</a>
+                    <a href="/bookings">My Bookings</a>
+                    <a href="/logout" style="color:#fe424d;">Logout</a>
+                  </div>
+                </div>
+                <% } %>
+
+                  <% if(currUser.role==="hotelOwner" ) { %>
+                    <div class="dropdown user-dropdown">
+                      <button class="dropbtn">
+                        <i class="fa-solid fa-hotel"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <a href="/listings/new">Add Listing</a>
+                        <a href="/owner/my-listings">My Listings</a>
+                        <a href="/owner/bookings">Bookings</a>
+                        <a href="/logout" style="color:#fe424d;">Logout</a>
+                      </div>
+                    </div>
+                    <% } %>
+
+                      <% if(currUser.role==="admin" ) { %>
+                        <div class="dropdown user-dropdown">
+                          <button class="dropbtn">
+                            <i class="fa-solid fa-shield-halved"></i>
+                          </button>
+                          <div class="dropdown-content">
+                            <a href="/admin/all-users">Manage Users</a>
+                            <a href="/listings">Manage Listings</a>
+                            <a href="/logout" style="color:#fe424d;">Logout</a>
+                          </div>
+                        </div>
+                        <% } %>
+
+                          <% } %>
 
       </div>
     </div>
+
   </div>
 </nav>

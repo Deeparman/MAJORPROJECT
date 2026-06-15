@@ -1,0 +1,102 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>All Reviews</h2>
+
+    <span class="badge bg-danger fs-6">
+        <%= reviews.length %> Reviews
+    </span>
+
+</div>
+
+<% if(reviews.length === 0){ %>
+
+    <div class="alert alert-info">
+        No reviews found.
+    </div>
+
+<% } else { %>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-danger">
+
+                        <tr>
+                            <th>User</th>
+                            <th>Listing</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% reviews.forEach(review => { %>
+
+                        <tr>
+
+                            <td>
+                                <%= review.author?.username || "Unknown" %>
+                            </td>
+
+                            <td>
+                                <%= review.listing?.title || "Deleted Listing" %>
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-warning text-dark">
+                                    <%= review.rating %> ★
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <%= review.comment %>
+
+                            </td>
+
+                            <td>
+
+                                <form
+                                    method="POST"
+                                    action="/admin/reviews/<%= review._id %>?_method=DELETE"
+                                >
+
+                                    <button class="btn btn-danger btn-sm">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<% } %>
+
+</div>
