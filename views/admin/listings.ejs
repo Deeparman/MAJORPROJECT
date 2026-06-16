@@ -1,0 +1,127 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container-fluid mt-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="fw-bold">Manage Listings</h1>
+        <p class="text-muted">
+            <%= listings.length %> listings on the platform
+        </p>
+    </div>
+</div>
+
+<div class="row">
+
+    <% listings.forEach(listing => { %>
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="admin-listing-card">
+
+            <div class="position-relative">
+
+                <img
+                    src="<%= listing.image.url %>"
+                    class="admin-listing-img"
+                >
+
+                <% if(listing.status === "approved"){ %>
+
+                    <span class="status approved">
+                        Approved
+                    </span>
+
+                <% } else if(listing.status === "pending"){ %>
+
+                    <span class="status pending">
+                        Pending Approval
+                    </span>
+
+                <% } else { %>
+
+                    <span class="status rejected">
+                        Rejected
+                    </span>
+
+                <% } %>
+
+                <span class="price-tag">
+                    ₹<%= listing.price %>/night
+                </span>
+
+            </div>
+
+            <!-- Body -->
+
+            <div class="p-4">
+
+                <h4 class="fw-bold mb-2">
+                    <%= listing.title %>
+                </h4>
+
+                <p class="text-muted mb-2">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <%= listing.location %>,
+                    <%= listing.country %>
+                </p>
+
+                <p class="mb-3">
+                    Hosted by
+                    <strong>
+                        <%= listing.owner?.username || "Unknown" %>
+                    </strong>
+                </p>
+
+                <div class="d-flex gap-2 flex-wrap">
+
+                    <% if(listing.status === "pending"){ %>
+
+                    <form
+                        method="POST"
+                        action="/admin/listings/<%= listing._id %>/approve?_method=PATCH"
+                    >
+
+                        <button class="btn btn-success">
+                             Approve
+                        </button>
+
+                    </form>
+
+                    <form
+                        method="POST"
+                        action="/admin/listings/<%= listing._id %>/reject?_method=PATCH"
+                    >
+
+                        <button class="btn btn-dark">
+                            Reject
+                        </button>
+
+                    </form>
+
+                    <% } %>
+
+                    
+                    <form
+                        method="POST"
+                        action="/listings/<%= listing._id %>?_method=DELETE"
+                    >
+
+                        <button class="btn btn-outline-danger">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <% }) %>
+
+</div>
+</div>

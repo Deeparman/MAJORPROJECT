@@ -91,4 +91,15 @@ router.get("/reviews", isLoggedIn, isAdmin, async(req,res)=>{
     });
 });
 
+router.get("/manage-listings", isLoggedIn, isAdmin, async (req, res) => {
+
+    const listings = await Listing.find({})
+        .populate("owner");
+
+    res.render("admin/listings", {
+        listings
+    });
+
+});
+
 module.exports = router;
