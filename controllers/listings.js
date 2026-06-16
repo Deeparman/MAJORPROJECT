@@ -53,7 +53,7 @@ module.exports.createListing = async (req, res) => {
     await newlist.save();
 
     req.flash("success", "Listing submitted for admin approval!");
-    res.redirect("/owner");
+    res.redirect("/listings");
 };
 
 module.exports.renderEditForm = async (req, res) => {
@@ -117,5 +117,5 @@ module.exports.destroyListing = async (req, res) => {
     await Listing.findByIdAndDelete(id);
 
     req.flash("success", "Listing deleted!");
-    res.redirect("/listings");
+    res.redirect("/admin/manage-listings");
 };

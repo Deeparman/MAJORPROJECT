@@ -20,7 +20,7 @@
           <i class="fa-solid fa-hourglass-half"></i>
           <span>Pending Approvals</span>
         </a>
-        <a href="/listings" class="admin-nav-link">
+        <a href="/admin/manage-listings" class="admin-nav-link">
           <i class="fa-solid fa-store"></i>
           <span>Listings</span>
         </a>
@@ -33,9 +33,6 @@
           <span>Bookings</span>
         </a>
       </nav>
-
-
-
 
       <div class="admin-sidebar-footer">
         <div class="admin-chip">
@@ -100,6 +97,28 @@
           </div>
           <div class="stat-value">
             <%= users.filter(u=> u.role === "hotelOwner").length %>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-head">
+            <span class="stat-icon stat-icon-yellow">
+              <i class="fa-solid fa-star"></i>
+            </span>
+            <h6 class="mb-1">Total Reviews</h6>
+          </div>
+          <div class="stat-value">
+            <%= reviews.length %>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-head">
+            <span class="stat-icon stat-icon-blue">
+              <i class="fa-solid fa-calendar-check"></i>
+            </span>
+            <h6 class="mb-1">Total Bookings</h6>
+          </div>
+          <div class="stat-value">
+            <%= bookings.length %>
           </div>
         </div>
       </section>

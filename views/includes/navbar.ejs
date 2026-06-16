@@ -11,76 +11,85 @@
     <div class="collapse navbar-collapse mobile-nav-bg" id="navbarNavAltMarkup">
 
       <!-- SEARCH BAR -->
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search" action="/listings/search" method="get">
-          <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" name="query">
-          <button class="btn btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i> Search
-          </button>
-        </form>
-      </div>
+      <% if(currUser && currUser.role==="user" ) { %>
 
-      <!-- NAV LINKS -->
-      <div class="navbar-nav ms-auto">
+        <div class="navbar-nav ms-auto">
+          <form class="d-flex" role="search" action="/listings/search" method="get">
+            <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" name="query">
 
-        <a class="nav-link" href="/listings/new">
-          <b>Wanderlust your home</b>
-        </a>
+            <button class="btn btn-search" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              Search
+            </button>
+          </form>
+        </div>
+        <% } %>
 
-        <!-- NOT LOGGED IN -->
-        <% if(!currUser) { %>
-          <a class="nav-link" href="/signup"><b>SignUp</b></a>
-          <a class="nav-link" href="/login"><b>LogIn</b></a>
-          <% } %>
 
-            <!-- LOGGED IN -->
+          <!-- NAV LINKS -->
+          <div class="navbar-nav ms-auto">
+            <% if(currUser && currUser.role==="user" ) { %>
 
-            <% if(currUser) { %>
+              <a class="nav-link" href="/listings/new">
+                <b>Wanderlust your home</b>
+              </a>
+              <% } %>
 
-              <% if(currUser.role==="user" ) { %>
-                <div class="dropdown user-dropdown">
-                  <button class="dropbtn">
-                    <i class="fa-solid fa-user"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="/profile">My Profile</a>
-                    <a href="/favorites">My Favorites</a>
-                    <a href="/bookings">My Bookings</a>
-                    <a href="/logout" style="color:#fe424d;">Logout</a>
-                  </div>
-                </div>
-                <% } %>
+                <!-- NOT LOGGED IN -->
+                <% if(!currUser) { %>
+                  <a class="nav-link" href="/signup"><b>SignUp</b></a>
+                  <a class="nav-link" href="/login"><b>LogIn</b></a>
+                  <% } %>
 
-                  <% if(currUser.role==="hotelOwner" ) { %>
-                    <div class="dropdown user-dropdown">
-                      <button class="dropbtn">
-                        <i class="fa-solid fa-hotel"></i>
-                      </button>
-                      <div class="dropdown-content">
-                        <a href="/listings/new">Add Listing</a>
-                        <a href="/owner/my-listings">My Listings</a>
-                        <a href="/owner/bookings">Bookings</a>
-                        <a href="/logout" style="color:#fe424d;">Logout</a>
-                      </div>
-                    </div>
-                    <% } %>
+                    <!-- LOGGED IN -->
 
-                      <% if(currUser.role==="admin" ) { %>
+                    <% if(currUser) { %>
+
+                      <% if(currUser.role==="user" ) { %>
                         <div class="dropdown user-dropdown">
                           <button class="dropbtn">
-                            <i class="fa-solid fa-shield-halved"></i>
+                            <i class="fa-solid fa-user"></i>
                           </button>
                           <div class="dropdown-content">
-                            <a href="/admin/all-users">Manage Users</a>
-                            <a href="/admin/manage-listings">Manage Listings</a>
+                            <a href="/profile">My Profile</a>
+                            <a href="/favorites">My Favorites</a>
+                            <a href="/bookings">My Bookings</a>
                             <a href="/logout" style="color:#fe424d;">Logout</a>
                           </div>
                         </div>
                         <% } %>
 
-                          <% } %>
+                          <% if(currUser.role==="hotelOwner" ) { %>
+                            <div class="dropdown user-dropdown">
+                              <button class="dropbtn">
+                                <i class="fa-solid fa-hotel"></i>
+                              </button>
+                              <div class="dropdown-content">
+                                <a href="/listings/new">Add Listing</a>
+                                <a href="/owner/my-listings">My Listings</a>
+                                <a href="/owner/bookings">Bookings</a>
+                                <a href="/logout" style="color:#fe424d;">Logout</a>
+                              </div>
+                            </div>
+                            <% } %>
 
-      </div>
+                              <% if(currUser.role==="admin" ) { %>
+                                <div class="dropdown user-dropdown">
+                                  <button class="dropbtn">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                  </button>
+                                  <div class="dropdown-content">
+                                    <a href="/admin/">Dashboard</a>
+                                    <a href="/admin/all-users">Manage Users</a>
+                                    <a href="/admin/manage-listings">Manage Listings</a>
+                                    <a href="/logout" style="color:#fe424d;">Logout</a>
+                                  </div>
+                                </div>
+                                <% } %>
+
+                                  <% } %>
+
+          </div>
     </div>
 
   </div>

@@ -35,20 +35,3 @@ router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderE
 module.exports = router;
 
 
-
-
-//INDEX ROUTE
-// router.get("/", wrapAsync(listingController.index));
-
-//CREATE ROUTE
-// router.post("/", isLoggedIn, validateListing, wrapAsync(listingController.createListing));
-
-//Read: SHOW ROUTE
-// router.get("/:id", wrapAsync(listingController.showListing));
-
-//UPDATE ROUTE
-// router.put("/:id", validateListing, isLoggedIn, isOwner, wrapAsync(listingController.updateListing));
-
-//DESTROY ROUTE
-// router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
-

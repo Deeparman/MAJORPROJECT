@@ -11,8 +11,10 @@ const Review = require("../models/review");
 router.get("/", isLoggedIn, isAdmin, async (req, res) => {
     const users = await require("../models/user").find({});
     const listings = await Listing.find({});
+    const reviews = await Review.find({});
+    const bookings = await Booking.find({});
     
-    res.render("admin/dashboard.ejs", { users, listings });
+    res.render("admin/dashboard.ejs", { users, listings, reviews, bookings });
 });
 
 
